@@ -8,6 +8,5 @@ class Favorite{
     constructor(name:String){
         this.name = name
     }
-    constructor(){
-    }
+    constructor()
 }

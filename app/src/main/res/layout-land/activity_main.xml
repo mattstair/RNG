@@ -7,6 +7,14 @@
     android:background="@color/colorPrimaryDark"
     tools:context="com.example.matt.rng4.MainActivity">
 
+    <Button
+        android:id="@+id/btnFavorites2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Favorites"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="110dp" />
+
     <TextView
         android:id="@+id/fullName"
         android:layout_width="wrap_content"
