@@ -1,22 +1,24 @@
 package com.example.matt.rng4
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_favorites.*
+import android.support.v7.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.favorites.*
 
 class FavoritesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_favorites)
+        setContentView(R.layout.favorites)
 
-        val db = DatabaseHandler(this)
+        recyclerView_Favorites.layoutManager  = LinearLayoutManager(this)
+        recyclerView_Favorites.adapter = FavoriteAdapter(this)
 
-        val data = db.readData()
-        textFavorites.text = ""
-        for (i in 0..(data.size - 1)){
-            textFavorites.append(data.get(i).name + "\n")
-        }
+    }
 
+    override fun onBackPressed() {
+        val intent = Intent(this,MainActivity::class.java)
+        startActivity(intent)
     }
 }

@@ -4,7 +4,6 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.widget.Toast
 import java.util.ArrayList
 
 val DATABASE_NAME = "myDB"
@@ -30,10 +29,7 @@ class DatabaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE
         val cv = ContentValues()
         cv.put(COL_NAME,favorite.name)
         val result = db.insert(TABLE_NAME,null,cv)
-        if (result == -1.toLong())
-            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
-        else
-            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
+
     }
 
     fun readData() : MutableList<Favorite>{
@@ -54,6 +50,13 @@ class DatabaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE
         result.close()
         db.close()
         return list
+    }
+
+    fun deleteData(ID: Int){
+        val db = this.writableDatabase
+        val result = db.delete(TABLE_NAME, COL_ID +" = "+ID.toString(),null)
+
+        db.close()
     }
 
 }
