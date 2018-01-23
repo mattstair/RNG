@@ -28,7 +28,16 @@ class FavoriteAdapter (var context: Context): RecyclerView.Adapter<CustomViewHol
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder?, position: Int) {
-        holder?.view?.textViewName?.text = data.get(position).name
+        val name = data[position].name
+        holder?.view?.textViewName?.text = name
+        holder?.view?.btnShare?.setOnClickListener(View.OnClickListener {
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.setType("text/plain")
+            val shareSub = "Hilarious Name"
+            intent.putExtra(Intent.EXTRA_SUBJECT,shareSub)
+            intent.putExtra(Intent.EXTRA_TEXT,name)
+            context.startActivity(Intent.createChooser(intent,"Share Using..."))
+        })
         holder?.view?.btnDelete?.setOnClickListener(View.OnClickListener {
             db.deleteData(data.get(position).id)
             Toast.makeText(context,"Deleted!",Toast.LENGTH_SHORT).show()
